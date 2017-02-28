@@ -1,12 +1,13 @@
 from tkinter import *
+
 from tkinter import messagebox
 import os
 import numpy as np
+from game import setup
 
 
 # Load Database
 database = np.load('database.npy').item()
-# print(database)
 
 # Setup window
 root = Tk()
@@ -52,8 +53,6 @@ class MakeLabel:
         self.newPassword.entry.config(show="*")
         self.verifyPassword.entry.config(show="*")
 
-        database[username.entry.get()] = password.entry.get()
-        np.save('database.npy', database)
 
     def createUser(self, event):
         if self.newPassword.entry.get() == '':
@@ -80,15 +79,17 @@ class MakeLabel:
         try:
             if database[username.entry.get()] == password.entry.get():
                 messagebox.showinfo("Success", "Logging in")
+                setup(username.entry.get())
             else:
                 messagebox.showinfo("Error", "Password not found")
         except KeyError:
             messagebox.showinfo("Error", "Password not found")
 
 # Use with caution
-def clearDatabase():
+def clearDatabases():
     clear = {}
     np.save('database.npy', clear)
+    np.save('scores.npy', clear)
 
 # Setup Tkinter objects
 MakeLabel("label", 0, 0, "Username", root)
