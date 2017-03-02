@@ -81,9 +81,9 @@ class MakeLabel:
                 messagebox.showinfo("Success", "Logging in")
                 setup(username.entry.get())
             else:
-                messagebox.showinfo("Error", "Password not found")
+                messagebox.showinfo("Error", "Password/username not found")
         except KeyError:
-            messagebox.showinfo("Error", "Password not found")
+            messagebox.showinfo("Error", "Password/username not found")
 
 # Use with caution
 def clearDatabases():
